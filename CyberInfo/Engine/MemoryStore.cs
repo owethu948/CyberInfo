@@ -1,0 +1,49 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace CyberInfo.Engine
+{
+    /// <summary>
+    /// Stores what the bot knows about the user.
+    /// Uses generic collections: HashSet&lt;T&gt;, Queue&lt;T&gt;, Dictionary&lt;,&gt;.
+    /// </summary>
+    public class MemoryStore
+    {
+        public string UserName { get; set; } = string.Empty;
+        public bool NameCaptured => !string.IsNullOrWhiteSpace(UserName);
+        public string? LastTopic { get; set; }
+
+        // Generic HashSet prevents duplicate interests
+        public HashSet<string> Interests { get; } = new(System.StringComparer.OrdinalIgnoreCase);
+
+        // Generic Queue for recent input history (sliding window)
+        private readonly Queue<string> _history = new();
+        private const int MaxHistory = 10;
+
+        // Generic Dictionary for arbitrary remembered facts
+        private readonly Dictionary<string, string> _facts = new();
+
+        public void RememberInterest(string topic)
+        {
+            if (!string.IsNullOrWhiteSpace(topic)) Interests.Add(topic.Trim());
+        }
+
+        public string GetInterestSummary() =>
+            Interests.Count > 0 ? string.Join(", ", Interests) : "—";
+
+        public void PushInput(string input)
+        {
+            if (_history.Count >= MaxHistory) _history.Dequeue();
+            _history.Enqueue(input);
+        }
+
+        public void StoreFact(string key, string value) => _facts[key] = value;
+        public string? GetFact(string key) => _facts.TryGetValue(key, out var v) ? v : null;
+
+        public string GetPersonalisedPrefix()
+        {
+            if (Interests.Count == 0) return string.Empty;
+            return $"As someone interested in {Interests.Last()}, ";
+        }
+    }
+}
