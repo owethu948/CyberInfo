@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "weT3kb2fCX8=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lisakhanya Jonas\\source\\repos\\CyberInfo\\CyberInfo\\CyberInfo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lisakhanya Jonas\\.nuget\\packages\\system.windows.extensions\\10.0.8\\system.windows.extensions.10.0.8.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference System.Windows.Extensions will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
+      "projectPath": "C:\\Users\\Lisakhanya Jonas\\source\\repos\\CyberInfo\\CyberInfo\\CyberInfo.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Lisakhanya Jonas\\source\\repos\\CyberInfo\\CyberInfo\\CyberInfo.csproj",
+      "libraryId": "System.Windows.Extensions",
+      "targetGraphs": [
+        "net10.0-windows7.0"
+      ]
+    }
+  ]
+}
